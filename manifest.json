@@ -1,0 +1,444 @@
+{
+  "format": "rv-nand-static-v1",
+  "programs": {
+    "sum": {
+      "metadata_path": "data/sum.metadata.json.gz",
+      "metadata_encoding": "gzip",
+      "metadata_bytes": 32115688,
+      "metadata_gzip_bytes": 2716387,
+      "frames": {
+        "encoding": "packed-bits-v1",
+        "count": 7,
+        "chunk_frames": 64,
+        "chunks": [
+          {
+            "path": "data/sum.frames.00000.json.gz",
+            "first_frame": 0,
+            "frame_count": 7,
+            "bytes": 100363,
+            "gzip_bytes": 4726
+          }
+        ]
+      }
+    },
+    "matrix": {
+      "metadata_path": "data/matrix.metadata.json.gz",
+      "metadata_encoding": "gzip",
+      "metadata_bytes": 104809821,
+      "metadata_gzip_bytes": 8837004,
+      "frames": {
+        "encoding": "packed-bits-v1",
+        "count": 3650,
+        "chunk_frames": 64,
+        "chunks": [
+          {
+            "path": "data/matrix.frames.00000.json.gz",
+            "first_frame": 0,
+            "frame_count": 64,
+            "bytes": 2886756,
+            "gzip_bytes": 219983
+          },
+          {
+            "path": "data/matrix.frames.00001.json.gz",
+            "first_frame": 64,
+            "frame_count": 64,
+            "bytes": 2893599,
+            "gzip_bytes": 232918
+          },
+          {
+            "path": "data/matrix.frames.00002.json.gz",
+            "first_frame": 128,
+            "frame_count": 64,
+            "bytes": 2892253,
+            "gzip_bytes": 234013
+          },
+          {
+            "path": "data/matrix.frames.00003.json.gz",
+            "first_frame": 192,
+            "frame_count": 64,
+            "bytes": 2894170,
+            "gzip_bytes": 234042
+          },
+          {
+            "path": "data/matrix.frames.00004.json.gz",
+            "first_frame": 256,
+            "frame_count": 64,
+            "bytes": 2893357,
+            "gzip_bytes": 233576
+          },
+          {
+            "path": "data/matrix.frames.00005.json.gz",
+            "first_frame": 320,
+            "frame_count": 64,
+            "bytes": 2893573,
+            "gzip_bytes": 234442
+          },
+          {
+            "path": "data/matrix.frames.00006.json.gz",
+            "first_frame": 384,
+            "frame_count": 64,
+            "bytes": 2894537,
+            "gzip_bytes": 233201
+          },
+          {
+            "path": "data/matrix.frames.00007.json.gz",
+            "first_frame": 448,
+            "frame_count": 64,
+            "bytes": 2893401,
+            "gzip_bytes": 230681
+          },
+          {
+            "path": "data/matrix.frames.00008.json.gz",
+            "first_frame": 512,
+            "frame_count": 64,
+            "bytes": 2894492,
+            "gzip_bytes": 230306
+          },
+          {
+            "path": "data/matrix.frames.00009.json.gz",
+            "first_frame": 576,
+            "frame_count": 64,
+            "bytes": 2896295,
+            "gzip_bytes": 229866
+          },
+          {
+            "path": "data/matrix.frames.00010.json.gz",
+            "first_frame": 640,
+            "frame_count": 64,
+            "bytes": 2895378,
+            "gzip_bytes": 230128
+          },
+          {
+            "path": "data/matrix.frames.00011.json.gz",
+            "first_frame": 704,
+            "frame_count": 64,
+            "bytes": 2896317,
+            "gzip_bytes": 229889
+          },
+          {
+            "path": "data/matrix.frames.00012.json.gz",
+            "first_frame": 768,
+            "frame_count": 64,
+            "bytes": 2896269,
+            "gzip_bytes": 230115
+          },
+          {
+            "path": "data/matrix.frames.00013.json.gz",
+            "first_frame": 832,
+            "frame_count": 64,
+            "bytes": 2895201,
+            "gzip_bytes": 229159
+          },
+          {
+            "path": "data/matrix.frames.00014.json.gz",
+            "first_frame": 896,
+            "frame_count": 64,
+            "bytes": 2892589,
+            "gzip_bytes": 229337
+          },
+          {
+            "path": "data/matrix.frames.00015.json.gz",
+            "first_frame": 960,
+            "frame_count": 64,
+            "bytes": 2890899,
+            "gzip_bytes": 228719
+          },
+          {
+            "path": "data/matrix.frames.00016.json.gz",
+            "first_frame": 1024,
+            "frame_count": 64,
+            "bytes": 2890958,
+            "gzip_bytes": 227792
+          },
+          {
+            "path": "data/matrix.frames.00017.json.gz",
+            "first_frame": 1088,
+            "frame_count": 64,
+            "bytes": 2892815,
+            "gzip_bytes": 228300
+          },
+          {
+            "path": "data/matrix.frames.00018.json.gz",
+            "first_frame": 1152,
+            "frame_count": 64,
+            "bytes": 2891884,
+            "gzip_bytes": 229242
+          },
+          {
+            "path": "data/matrix.frames.00019.json.gz",
+            "first_frame": 1216,
+            "frame_count": 64,
+            "bytes": 2891577,
+            "gzip_bytes": 228228
+          },
+          {
+            "path": "data/matrix.frames.00020.json.gz",
+            "first_frame": 1280,
+            "frame_count": 64,
+            "bytes": 2893355,
+            "gzip_bytes": 227045
+          },
+          {
+            "path": "data/matrix.frames.00021.json.gz",
+            "first_frame": 1344,
+            "frame_count": 64,
+            "bytes": 2894181,
+            "gzip_bytes": 232605
+          },
+          {
+            "path": "data/matrix.frames.00022.json.gz",
+            "first_frame": 1408,
+            "frame_count": 64,
+            "bytes": 2895928,
+            "gzip_bytes": 239921
+          },
+          {
+            "path": "data/matrix.frames.00023.json.gz",
+            "first_frame": 1472,
+            "frame_count": 64,
+            "bytes": 2897395,
+            "gzip_bytes": 240026
+          },
+          {
+            "path": "data/matrix.frames.00024.json.gz",
+            "first_frame": 1536,
+            "frame_count": 64,
+            "bytes": 2896203,
+            "gzip_bytes": 239748
+          },
+          {
+            "path": "data/matrix.frames.00025.json.gz",
+            "first_frame": 1600,
+            "frame_count": 64,
+            "bytes": 2895977,
+            "gzip_bytes": 240483
+          },
+          {
+            "path": "data/matrix.frames.00026.json.gz",
+            "first_frame": 1664,
+            "frame_count": 64,
+            "bytes": 2896618,
+            "gzip_bytes": 239309
+          },
+          {
+            "path": "data/matrix.frames.00027.json.gz",
+            "first_frame": 1728,
+            "frame_count": 64,
+            "bytes": 2894691,
+            "gzip_bytes": 237888
+          },
+          {
+            "path": "data/matrix.frames.00028.json.gz",
+            "first_frame": 1792,
+            "frame_count": 64,
+            "bytes": 2892216,
+            "gzip_bytes": 233895
+          },
+          {
+            "path": "data/matrix.frames.00029.json.gz",
+            "first_frame": 1856,
+            "frame_count": 64,
+            "bytes": 2895692,
+            "gzip_bytes": 234678
+          },
+          {
+            "path": "data/matrix.frames.00030.json.gz",
+            "first_frame": 1920,
+            "frame_count": 64,
+            "bytes": 2896584,
+            "gzip_bytes": 239141
+          },
+          {
+            "path": "data/matrix.frames.00031.json.gz",
+            "first_frame": 1984,
+            "frame_count": 64,
+            "bytes": 2897334,
+            "gzip_bytes": 238581
+          },
+          {
+            "path": "data/matrix.frames.00032.json.gz",
+            "first_frame": 2048,
+            "frame_count": 64,
+            "bytes": 2895496,
+            "gzip_bytes": 238537
+          },
+          {
+            "path": "data/matrix.frames.00033.json.gz",
+            "first_frame": 2112,
+            "frame_count": 64,
+            "bytes": 2896959,
+            "gzip_bytes": 239385
+          },
+          {
+            "path": "data/matrix.frames.00034.json.gz",
+            "first_frame": 2176,
+            "frame_count": 64,
+            "bytes": 2894951,
+            "gzip_bytes": 238133
+          },
+          {
+            "path": "data/matrix.frames.00035.json.gz",
+            "first_frame": 2240,
+            "frame_count": 64,
+            "bytes": 2896120,
+            "gzip_bytes": 236006
+          },
+          {
+            "path": "data/matrix.frames.00036.json.gz",
+            "first_frame": 2304,
+            "frame_count": 64,
+            "bytes": 2893578,
+            "gzip_bytes": 230721
+          },
+          {
+            "path": "data/matrix.frames.00037.json.gz",
+            "first_frame": 2368,
+            "frame_count": 64,
+            "bytes": 2892956,
+            "gzip_bytes": 228032
+          },
+          {
+            "path": "data/matrix.frames.00038.json.gz",
+            "first_frame": 2432,
+            "frame_count": 64,
+            "bytes": 2894570,
+            "gzip_bytes": 227565
+          },
+          {
+            "path": "data/matrix.frames.00039.json.gz",
+            "first_frame": 2496,
+            "frame_count": 64,
+            "bytes": 2893399,
+            "gzip_bytes": 228616
+          },
+          {
+            "path": "data/matrix.frames.00040.json.gz",
+            "first_frame": 2560,
+            "frame_count": 64,
+            "bytes": 2892980,
+            "gzip_bytes": 228452
+          },
+          {
+            "path": "data/matrix.frames.00041.json.gz",
+            "first_frame": 2624,
+            "frame_count": 64,
+            "bytes": 2894406,
+            "gzip_bytes": 227409
+          },
+          {
+            "path": "data/matrix.frames.00042.json.gz",
+            "first_frame": 2688,
+            "frame_count": 64,
+            "bytes": 2891821,
+            "gzip_bytes": 229359
+          },
+          {
+            "path": "data/matrix.frames.00043.json.gz",
+            "first_frame": 2752,
+            "frame_count": 64,
+            "bytes": 2893644,
+            "gzip_bytes": 231932
+          },
+          {
+            "path": "data/matrix.frames.00044.json.gz",
+            "first_frame": 2816,
+            "frame_count": 64,
+            "bytes": 2895335,
+            "gzip_bytes": 231894
+          },
+          {
+            "path": "data/matrix.frames.00045.json.gz",
+            "first_frame": 2880,
+            "frame_count": 64,
+            "bytes": 2894418,
+            "gzip_bytes": 232124
+          },
+          {
+            "path": "data/matrix.frames.00046.json.gz",
+            "first_frame": 2944,
+            "frame_count": 64,
+            "bytes": 2895357,
+            "gzip_bytes": 231905
+          },
+          {
+            "path": "data/matrix.frames.00047.json.gz",
+            "first_frame": 3008,
+            "frame_count": 64,
+            "bytes": 2895309,
+            "gzip_bytes": 232060
+          },
+          {
+            "path": "data/matrix.frames.00048.json.gz",
+            "first_frame": 3072,
+            "frame_count": 64,
+            "bytes": 2894241,
+            "gzip_bytes": 231037
+          },
+          {
+            "path": "data/matrix.frames.00049.json.gz",
+            "first_frame": 3136,
+            "frame_count": 64,
+            "bytes": 2895091,
+            "gzip_bytes": 231148
+          },
+          {
+            "path": "data/matrix.frames.00050.json.gz",
+            "first_frame": 3200,
+            "frame_count": 64,
+            "bytes": 2895146,
+            "gzip_bytes": 234928
+          },
+          {
+            "path": "data/matrix.frames.00051.json.gz",
+            "first_frame": 3264,
+            "frame_count": 64,
+            "bytes": 2895743,
+            "gzip_bytes": 234201
+          },
+          {
+            "path": "data/matrix.frames.00052.json.gz",
+            "first_frame": 3328,
+            "frame_count": 64,
+            "bytes": 2894071,
+            "gzip_bytes": 234920
+          },
+          {
+            "path": "data/matrix.frames.00053.json.gz",
+            "first_frame": 3392,
+            "frame_count": 64,
+            "bytes": 2895395,
+            "gzip_bytes": 234742
+          },
+          {
+            "path": "data/matrix.frames.00054.json.gz",
+            "first_frame": 3456,
+            "frame_count": 64,
+            "bytes": 2893519,
+            "gzip_bytes": 234717
+          },
+          {
+            "path": "data/matrix.frames.00055.json.gz",
+            "first_frame": 3520,
+            "frame_count": 64,
+            "bytes": 2894821,
+            "gzip_bytes": 234091
+          },
+          {
+            "path": "data/matrix.frames.00056.json.gz",
+            "first_frame": 3584,
+            "frame_count": 64,
+            "bytes": 2893397,
+            "gzip_bytes": 234001
+          },
+          {
+            "path": "data/matrix.frames.00057.json.gz",
+            "first_frame": 3648,
+            "frame_count": 2,
+            "bytes": 90271,
+            "gzip_bytes": 7614
+          }
+        ]
+      }
+    }
+  }
+}

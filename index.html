@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f4f6f8">
+  <title>RV32I · Execution lab</title>
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <header class="masthead"><a class="brand" href="./" aria-label="RISC-V execution lab"><span class="brand-mark">rv<span>32</span>i</span><span>EXECUTION LAB</span></a><a class="about-link" href="#how-it-works">How to read this ↗</a></header>
+  <main>
+    <section class="intro"><div><h1 class="eyebrow intro-label">INTERACTIVE DATAPATH</h1></div><div class="program-options"><div class="program-picker"><label for="program">EXPLORE A PROGRAM</label><select id="program" disabled><option value="matrix">Matrix multiplication · 2 × 2</option><option value="sum" selected>A simple sum · 1 + 2 + 3</option><option value="custom">Custom assembly</option></select></div><div class="program-picker"><label for="backend">DATAPATH IMPLEMENTATION</label><select id="backend" disabled><option value="gate" selected>Gate-level NAND</option></select></div></div></section>
+    <section class="transport" aria-label="Execution controls"><div class="transport-buttons"><button id="reset" class="icon-button" title="Reset to first cycle" aria-label="Reset to first cycle" disabled>↶</button><button id="previous" class="icon-button" title="Previous cycle (Left arrow)" aria-label="Previous cycle" disabled>←</button><button id="play" class="play-button" disabled><span id="play-icon">▶</span><span id="play-label">Play</span></button><button id="next" class="icon-button" title="Next cycle (Right arrow)" aria-label="Next cycle" disabled>→</button><span class="divider"></span><button id="next-instruction" class="instruction-button" title="Next instruction (Shift + Right)" disabled>Next instruction <span>⇥</span></button></div><div class="timeline"><label for="scrubber"><span>CYCLE <strong id="cycle-count">—</strong></span><span id="cycle-total">Loading trace…</span></label><input id="scrubber" type="range" min="0" max="0" value="0" step="1" aria-label="Execution cycle" disabled></div><label class="speed-label" for="speed">SPEED<select id="speed"><option value="1">1 cycle/s</option><option value="4" selected>4 cycles/s</option><option value="12">12 cycles/s</option><option value="40">40 cycles/s</option></select></label></section>
+    <div id="message" class="message" role="status">Running the program and preparing its execution trace…</div>
+
+    <section id="editor-panel" class="editor-panel" hidden><div class="editor-heading"><div><span class="eyebrow">CUSTOM PROGRAM</span><h2>Assemble and trace</h2></div><button id="assemble" class="assemble-button">Assemble &amp; trace</button></div><label for="assembly-source">RV32I assembly source</label><textarea id="assembly-source" spellcheck="false" placeholder="Paste RV32I assembly">.text
+.globl _start
+_start:
+    li a0, 40
+    addi a0, a0, 2
+    ebreak
+</textarea><div id="diagnostics" class="diagnostics" role="status"></div></section>
+    <section class="workspace" aria-label="Synchronized assembly and datapath">
+      <section class="assembly-panel"><div class="panel-heading dark"><div><span class="panel-number">01</span><h2>Assembly</h2></div><span id="source-file" class="file-badge">matrix.s</span></div><div class="assembly-subhead"><span>ADDRESS</span><span>SOURCE</span><button id="follow" class="follow-button" aria-pressed="true">Follow on</button></div><div id="listing" class="listing" tabindex="0" aria-label="Assembly source; active instruction is highlighted"></div><div class="assembly-footer"><span class="blue-dot"></span><span id="instruction-caption">Current instruction</span><span id="instruction-address">—</span></div></section>
+      <section class="datapath-panel"><div class="panel-heading"><div><span class="panel-number">02</span><h2>Datapath</h2></div><div class="legend"><span><i class="legend-active"></i>Active</span><span><i class="legend-write"></i>Writeback</span><span><i class="legend-idle"></i>Idle</span></div></div><div class="phase-heading"><div><span id="phase" class="phase-badge">FETCH</span><span id="state-id">Cycle —</span></div><span id="clock-note">Values before this cycle commits</span></div><aside id="alu-inspector" class="alu-inspector" aria-labelledby="alu-inspector-title" hidden tabindex="-1"><div class="inspector-heading"><div><span class="eyebrow">COMPONENT INSPECTOR</span><h2 id="alu-inspector-title">Captured ALU paths</h2></div><button id="alu-close" class="icon-button" aria-label="Close component inspector">×</button></div><p class="inspector-copy">Every path below was evaluated for this recorded graph state. The ALU mux selects one result; that result may not be architecturally consumed in this phase.</p><div id="alu-content"></div></aside><div class="diagram-container"><svg id="datapath" viewBox="0 0 920 560" role="img" aria-labelledby="diagram-title diagram-description"><title id="diagram-title">RISC-V multicycle datapath</title><desc id="diagram-description">Blue paths show data selected for this RISC-V cycle. Cyan outlines show storage written at commit.</desc></svg></div><div class="micro-operation"><div class="operation-number" id="operation-state">—</div><div><h3 id="operation-title">Fetch the next instruction</h3><p id="operation-description">The program counter supplies the instruction address.</p></div><span id="retired" class="retired" hidden>Instruction complete ✓</span></div><div id="control-signals" class="control-signals" aria-label="Control signals"></div></section>
+    </section>
+    <section class="register-strip" aria-label="Register values"><div class="register-heading"><span class="eyebrow">REGISTER FILE</span><span>Before → after commit</span></div><div id="registers" class="registers"></div></section>
+    <section class="bottom-grid"><div class="notes" id="how-it-works"><div class="eyebrow">TRACE THE EXECUTION</div><h2>Follow the blue path.</h2><p>Each step is one processor cycle. The highlighted instruction stays in view while fetch, decode, execute, memory, and writeback move its values through the machine.</p><p class="small-note">Use <kbd>←</kbd> <kbd>→</kbd> to step, <kbd>Space</kbd> to play, and <kbd>Shift</kbd> + <kbd>→</kbd> to advance an instruction. Cyan marks state written at the end of a cycle.</p></div><div class="result-panel"><div class="result-heading"><span class="eyebrow">PROGRAM RESULT</span><span id="verification" class="verification">Recorded run</span></div><div id="program-result"></div><p id="result-note" class="small-note"></p></div></section>
+    <footer><span>RISC-V · RV32I · byte-addressed · CSP</span><span>Real execution traces. Teaching datapath.</span></footer>
+  </main>
+</body>
+</html>
