@@ -19,7 +19,8 @@
             "gzip_bytes": 4726
           }
         ]
-      }
+      },
+      "title": "A simple sum \u00b7 1 + 2 + 3"
     },
     "matrix": {
       "metadata_path": "data/matrix.metadata.json.gz",
@@ -436,6 +437,84 @@
             "frame_count": 2,
             "bytes": 90271,
             "gzip_bytes": 7614
+          }
+        ]
+      },
+      "title": "Matrix multiplication \u00b7 2 \u00d7 2"
+    },
+    "bit-manipulation": {
+      "metadata_path": "data/bit-manipulation.metadata.json.gz",
+      "title": "Bit manipulation \u00b7 XOR, shifts, OR",
+      "metadata_encoding": "gzip",
+      "metadata_bytes": 35586794,
+      "metadata_gzip_bytes": 3028960,
+      "frames": {
+        "encoding": "packed-bits-v1",
+        "count": 15,
+        "chunk_frames": 64,
+        "chunks": [
+          {
+            "path": "data/bit-manipulation.frames.00000.json.gz",
+            "first_frame": 0,
+            "frame_count": 15,
+            "bytes": 240191,
+            "gzip_bytes": 12919
+          }
+        ]
+      }
+    },
+    "array-sum": {
+      "metadata_path": "data/array-sum.metadata.json.gz",
+      "title": "Array sum \u00b7 7 \u2212 3 + 12 + 5 \u2212 9",
+      "metadata_encoding": "gzip",
+      "metadata_bytes": 50166295,
+      "metadata_gzip_bytes": 4271450,
+      "frames": {
+        "encoding": "packed-bits-v1",
+        "count": 57,
+        "chunk_frames": 64,
+        "chunks": [
+          {
+            "path": "data/array-sum.frames.00000.json.gz",
+            "first_frame": 0,
+            "frame_count": 57,
+            "bytes": 1266231,
+            "gzip_bytes": 60443
+          }
+        ]
+      }
+    },
+    "fibonacci": {
+      "metadata_path": "data/fibonacci.metadata.json.gz",
+      "title": "Fibonacci \u00b7 first 8 values",
+      "metadata_encoding": "gzip",
+      "metadata_bytes": 50167075,
+      "metadata_gzip_bytes": 4271834,
+      "frames": {
+        "encoding": "packed-bits-v1",
+        "count": 137,
+        "chunk_frames": 64,
+        "chunks": [
+          {
+            "path": "data/fibonacci.frames.00000.json.gz",
+            "first_frame": 0,
+            "frame_count": 64,
+            "bytes": 1422659,
+            "gzip_bytes": 60730
+          },
+          {
+            "path": "data/fibonacci.frames.00001.json.gz",
+            "first_frame": 64,
+            "frame_count": 64,
+            "bytes": 1423233,
+            "gzip_bytes": 67556
+          },
+          {
+            "path": "data/fibonacci.frames.00002.json.gz",
+            "first_frame": 128,
+            "frame_count": 9,
+            "bytes": 198379,
+            "gzip_bytes": 10487
           }
         ]
       }

@@ -123,16 +123,19 @@ function componentBoundary(detail, component, inspection) {
   const section = document.createElement('section'); section.className = 'component-boundary branch-detail';
   const nandStorage = component?.implementation === 'nand_storage' || boundary?.kind === 'nand_storage';
   const actualNands = component?.circuit?.nodes?.some(node => node.kind === 'nand');
+  // The graph already says “Actual NAND implementation”; repeating a generic
+  // implementation boundary below it adds no useful information.
+  if (actualNands && !nandStorage && !boundary?.description) return;
   const description = boundary?.description || (nandStorage
     ? 'Seeded feedback and low-phase publication are explicit adapters around the actual NAND storage cells shown above.'
     : actualNands
       ? 'This published circuit is implemented by the actual NAND gates shown above.'
     : `Published boundary: ${boundary?.kind || component.implementation}. No NAND expansion is claimed here.`);
   section.append(text('h3', nandStorage ? 'NAND storage details' : actualNands ? 'NAND implementation' : 'Implementation boundary'), text('p', description, nandStorage || actualNands ? 'implementation-copy' : 'inspector-empty'));
-  if (component.implementation) section.append(text('p', `Implementation: ${component.implementation}`, 'implementation-copy'));
+  if (component.implementation && component.implementation !== 'nand') section.append(text('p', `Implementation: ${component.implementation}`, 'implementation-copy'));
   const {signals, recorded} = componentTelemetry(component, component?.circuit, inspection), order = component?.circuit?.telemetry_order || [];
   if (recorded && order.length) section.append(portValues(Object.fromEntries(order.map(name => [name, Object.hasOwn(signals, name) ? String(+signals[name]) : 'not recorded']))));
-  else section.append(text('p', nandStorage ? 'The displayed NAND cells are real; this frame has no settled value for every requested cell signal.' : 'No live internal values are inferred for this boundary.', 'inspector-empty'));
+  else if (!recorded) section.append(text('p', nandStorage ? 'The displayed NAND cells are real; this frame has no settled value for every requested cell signal.' : 'No live internal values are inferred for this boundary.', 'inspector-empty'));
   detail.append(section);
 }
 function componentInspectorCopy(component) {
@@ -191,7 +194,7 @@ function renderGenericInspector(frame) {
     genericGraph.refresh({signals, recorded, arithmetic, inspection});
     root.querySelectorAll('[data-component-execution]').forEach(node => {
       const active = inspection.active_components || (arithmetic.selected_component ? [arithmetic.selected_component] : []);
-      node.textContent = current.id === rootId ? `Active components: ${active.join(', ') || 'none'}` : `${componentIsActive(current.id, active) ? 'Active this cycle' : 'Not active this cycle'} · ${recorded ? 'recorded values' : 'topology only'}`;
+      node.textContent = current.id === rootId ? `Active: ${active.join(', ') || 'none'}` : `${componentIsActive(current.id, active) ? 'Active' : 'Inactive'} · ${recorded ? 'values recorded' : 'topology only'}`;
     });
     root.querySelectorAll('[data-component-consumed]').forEach(node => {
       const use = arithmetic.result_usage || {};
@@ -205,15 +208,13 @@ function renderGenericInspector(frame) {
   const path = componentPath(rootId, current.id, registry) || [rootId];
   path.forEach((id, position) => { if (position) crumb.append(text('span', '/')); const item=registry[id]; if (position === path.length-1) crumb.append(text('strong',item.label||id)); else { const button=document.createElement('button');button.type='button';button.textContent=item.label||id;button.onclick=()=>inspectGenericComponent(id);crumb.append(button); } });
   root.append(crumb);
-  const banner = document.createElement('section'); banner.className = 'alu-selection';
   const use = arithmetic.result_usage || {};
   const hasChildren = (current.children || []).some(id => registry[id]);
   const active = inspection.active_components || (arithmetic.selected_component ? [arithmetic.selected_component] : []);
-  const execution = text('small', current.id === rootId ? `Active components: ${active.join(', ') || 'none'}` : `${componentIsActive(current.id, active) ? 'Active this cycle' : 'Not active this cycle'} · ${recorded ? 'recorded values' : 'topology only'}`); execution.dataset.componentExecution='';
-  banner.append(text('span', hasChildren ? 'COMPONENT OVERVIEW' : 'COMPONENT INSPECTION', 'eyebrow'), text('strong', current.label || current.id), execution);
-  if (current.id === 'alu') { const consumed = text('small', use.computed ? (use.consumed ? `Consumed by ${use.consumer || 'the datapath'}` : 'Computed but not consumed') : 'No result was computed this cycle', 'component-usage'); consumed.dataset.componentConsumed=''; banner.append(consumed); }
-  if (componentDetailError?.component === current.id && componentDetailError?.frame === index) banner.append(text('small', `RAM capture unavailable: ${componentDetailError.message}. Showing topology with unrecorded values.`, 'inspector-empty'));
-  root.append(banner);
+  const execution = text('p', current.id === rootId ? `Active: ${active.join(', ') || 'none'}` : `${componentIsActive(current.id, active) ? 'Active' : 'Inactive'} · ${recorded ? 'values recorded' : 'topology only'}`, 'inspector-status'); execution.dataset.componentExecution='';
+  root.append(execution);
+  if (current.id === 'alu') { const consumed = text('p', use.computed ? (use.consumed ? `Consumed by ${use.consumer || 'the datapath'}` : 'Computed but not consumed') : 'No result was computed this cycle', 'component-usage'); consumed.dataset.componentConsumed=''; root.append(consumed); }
+  if (componentDetailError?.component === current.id && componentDetailError?.frame === index) root.append(text('p', `RAM capture unavailable: ${componentDetailError.message}. Showing topology with unrecorded values.`, 'inspector-empty'));
   if (hasChildren) {
     const overview = document.createElement('section'); overview.className = 'component-overview'; overview.append(text('h3', `${current.label || current.id} blocks · select a component`));
     overview.append(renderComponentDiagram({component:current, registry, selectedComponent:arithmetic.selected_component, activeComponents:active, resultUsage:arithmetic.result_usage, onInspect:inspectGenericComponent})); root.append(overview); const detail = document.createElement('section'); detail.className = 'branch-detail'; componentSource(detail, current, `${current.label || current.id} graph source`); componentBoundary(detail, current, inspection); root.append(detail); return true;
@@ -474,8 +475,12 @@ async function bootstrap() {
   } catch (error) { manifestFailure = error; }
   if (manifestFailure || !manifest) { $('message').className='message error'; $('message').textContent=`Saved trace could not be loaded: ${(manifestFailure || Error('empty manifest')).message}`; return; }
   staticManifest = manifest; staticManifestUrl = new URL('manifest.json', document.baseURI).href;
-  const allowed = new Set(Object.keys(manifest.programs));
-  [...$('program').options].forEach(option => { if (!allowed.has(option.value)) option.remove(); });
+  const picker = $('program'), entries = manifest.programs;
+  picker.replaceChildren();
+  const names = Object.keys(entries).sort((a, b) => a === 'matrix' ? -1 : b === 'matrix' ? 1 : a.localeCompare(b));
+  const knownTitles = {matrix: 'Matrix multiplication · 2 × 2', sum: 'A simple sum · 1 + 2 + 3'};
+  names.forEach(name => { const option = document.createElement('option'); option.value = name; option.textContent = entries[name]?.title || entries[name]?.program?.title || knownTitles[name] || name; picker.append(option); });
+  if (names.includes('matrix')) picker.value = 'matrix';
   $('editor-panel').hidden = true;
   try { await loadStatic($('program').value in manifest.programs ? $('program').value : Object.keys(manifest.programs)[0]); }
   catch (error) { session=null; $('message').className='message error'; $('message').textContent=`Saved trace could not be loaded: ${error.message}`; }
